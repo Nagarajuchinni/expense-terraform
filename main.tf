@@ -5,7 +5,7 @@ module "expense_terraform" {
     env             = var.env
     public_subnets  = var.public_subnets
     web_subnets     = var.web_subnets
-    app_subets      = var.app_subnets
+    app_subnets      = var.app_subnets
     db_subnets      = var.db_subnets
     azs             = var.azs
 }
