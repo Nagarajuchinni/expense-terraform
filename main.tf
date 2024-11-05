@@ -1,7 +1,4 @@
 module "expense-terraform" {
-    source = "./modules/vpc"  
-}
-
-resource "null_resource" "name" {
-  
+    source = "./modules/vpc"
+    vpc_cidr_block = var.vpc_cidr_block
 }
