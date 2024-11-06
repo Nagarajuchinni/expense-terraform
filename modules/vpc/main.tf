@@ -147,7 +147,7 @@ resource "aws_vpc_peering_connection" "peer" {
 
 resource "aws_route" "default-vpc-peer-route" {
   route_table_id            = var.default_route_table_id
-  destination_cidr_block    = var.default_vpc_id
+  destination_cidr_block    = var.default_vpc_cidr
   vpc_peering_connection_id = aws_vpc_peering_connection.peer.id
 }
 
