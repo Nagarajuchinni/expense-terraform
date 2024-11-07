@@ -15,7 +15,7 @@ module "expense_terraform" {
 
 }
 
-module "expense_terraform" {
+module "expense" {
   source                = "./modules/rds"
   subnets               = module.vpc.db_subnets
   rds_allocated_storage = var.rds_allocated_storage
