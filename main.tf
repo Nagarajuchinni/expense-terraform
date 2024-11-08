@@ -1,4 +1,4 @@
-module "expense_terraform" {
+module "vpc" {
   source            = "./modules/vpc"
     vpc_cidr_block  = var.vpc_cidr_block
     tags            = var.tags
@@ -15,7 +15,7 @@ module "expense_terraform" {
 
 }
 
-module "expense" {
+module "rds" {
   source                = "./modules/rds"
   subnets               = module.vpc.db_subnets
   rds_allocated_storage = var.rds_allocated_storage
