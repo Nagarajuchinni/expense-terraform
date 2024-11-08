@@ -6,14 +6,14 @@ output "public_subnets" {
     value = aws_subnet.public.*.id  
 }
 
-output "public_subnets" {
+output "web_subnets" {
     value = aws_subnet.web.*.id  
 }
 
-output "public_subnets" {
+output "app_subnets" {
     value = aws_subnet.app.*.id  
 }
 
-output "public_subnets" {
+output "db_subnets" {
     value = aws_subnet.db.*.id  
 }
