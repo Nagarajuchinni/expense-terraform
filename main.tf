@@ -41,13 +41,13 @@ module "backend" {
   vpc_id = module.vpc.vpc_id  
 }
 
-variable "backend" {
-  default = {
-    app_port = 8080
-    instance_count = 1
-    instance_type = "t2.micro"
-  }
-}
+# # variable "backend" {
+# #   default = {
+# #     app_port = 8080
+# #     instance_count = 1
+# #     instance_type = "t2.micro"
+# #   }
+# }
 
 
 # module "web" {
