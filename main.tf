@@ -27,3 +27,29 @@ module "rds" {
   vpc_id                = module.vpc.vpc_id
   sg_cidrs              = var.app_subnets
 }
+
+module "backend" {
+  source = "./modules/app"
+  app_port = var.backend["app_port"]
+  component = "backend"
+  env = var.env
+  instance_count = var.backend["instance_count"]
+  instance_type = var.backend["instance_type"]
+  sg_cidrs = var.web_subnets
+  subnets = module.vpc.app_subnets
+  tags = var.tags
+  vpc_id = module.vpc.vpc_id  
+}
+
+variable "backend" {
+  default = {
+    app_port = 8080
+    instance_count = 1
+    instance_type = "t2.micro"
+  }
+}
+
+
+# module "web" {
+  
+# }
