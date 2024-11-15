@@ -72,7 +72,7 @@ resource "aws_iam_role" "main" {
   })
 
   inline_policy {
-    name = "ssm_read_access"
+    name = "ssmreadaccess"
 
     policy = jsonencode({
 	    "Version": "2012-10-17",
