@@ -33,6 +33,7 @@ resource "aws_launch_template" "main" {
 
   }
   ))
+  
 }
 
 resource "aws_autoscaling_group" "main" {
@@ -50,6 +51,51 @@ resource "aws_autoscaling_group" "main" {
     key = "Name"
     value = "${var.env}-${var.component}"
     propagate_at_launch = true
+  }
+}
+
+resource "aws_iam_role" "main" {
+  name = "${var.env}-${var.component}"
+  tags = merge(var.tags, {Name = "${var.env}-${var.component}"})
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Sid    = ""
+        Principal = {
+          Service = "ec2.amazonaws.com"
+        }
+      },
+    ]
+  })
+
+  inline_policy {
+    name = "ssm_read_access"
+
+    policy = jsonencode({
+	    "Version": "2012-10-17",
+	    "Statement": [
+		{
+			"Sid": "get resources",
+			"Effect": "Allow",
+			"Action": [
+				"ssm:GetParameterHistory",
+				"ssm:GetParametersByPath",
+				"ssm:GetParameters",
+				"ssm:GetParameter"
+			],
+			"Resource": "arn:aws:ssm:us-east-1:376129881156:parameter/${var.env}-${var.component}.*"
+		},
+		{
+			"Sid": "list resources",
+			"Effect": "Allow",
+			"Action": "ssm:DescribeParameters",
+			"Resource": "*"
+		}
+	]
+})
   }
 }
 
